@@ -1,0 +1,8 @@
+mainTP1 : Date.o mainTP1.o
+	g++ Date.o mainTP1.o -o mainTP1
+	
+Date.o : Date.h Date.cxx
+	g++ -c Date.cxx
+
+mainTP1.o : mainTP1.cxx Date.h 
+	g++ -c mainTP1.cxx
