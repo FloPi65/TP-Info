@@ -1,53 +1,47 @@
 #include "Banque.h"
 
-// Constructeur
-Banque::Banque(int maxClient) : tab(nullptr), maxClient(maxClient), nbClients(0) {
-    if (this->maxClient <= 0) this->maxClient = 1;
-    tab = new Client*[this->maxClient];
-    for (int i = 0; i < this->maxClient; ++i) tab[i] = nullptr;
+//Constructeur
+Banque::Banque(int maxClient) {
+    if (maxClient <= 0) maxClient = 1;
+    this->maxClient = maxClient;
+    nbClients = 0;
+    tab = new Client*[maxClient];
+    for (int i = 0; i < maxClient; ++i)
+        tab[i] = nullptr;
 }
 
-// Destructeur (ne détruit pas les Client* pointés)
+//Destructeur
 Banque::~Banque() {
     delete[] tab;
-    tab = nullptr;
 }
 
-
-// Ajouter un client (on stocke l'adresse)
+//Ajoute un client
 bool Banque::ajouter(Client& c) {
-    if (nbClients >= maxClient) {
-        std::cout << "Banque pleine: impossible d'ajouter\n";
-        return false;
-    }
-    if (appartient(c)) {
-        std::cout << "Client deja present dans la banque.\n";
-        return false;
-    }
+    if (nbClients >= maxClient) return false;
+    if (appartient(c)) return false;
     tab[nbClients++] = &c;
     return true;
 }
 
-// Afficher
+//Affiche la banque
 void Banque::afficher() const {
-    std::cout << "=== Banque (" << nbClients << "/" << maxClient << ") ===\n";
-    for (int i = 0; i < nbClients; ++i) {
-        if (tab[i]) tab[i]->afficher();
-    }
+    std::cout << "Banque : " << nbClients << " clients / " << maxClient << "\n";
+    for (int i = 0; i < nbClients; ++i)
+        tab[i]->afficher();
 }
 
-// Test d'appartenance (compare adresses)
+//Teste si un client appartient à la banque
 bool Banque::appartient(const Client& c) const {
-    for (int i = 0; i < nbClients; ++i) {
+    for (int i = 0; i < nbClients; ++i)
         if (tab[i] == &c) return true;
-    }
     return false;
 }
-// Constructeur par copie (nouveau tableau, mêmes pointeurs vers clients)
-Banque::Banque(const Banque& other)
-    : tab(nullptr), maxClient(other.maxClient), nbClients(other.nbClients) {
+
+//Constructeur par copie
+Banque::Banque(const Banque& other) {
+    maxClient = other.maxClient;
+    nbClients = other.nbClients;
     tab = new Client*[maxClient];
-    for (int i = 0; i < maxClient; ++i) {
+    for (int i = 0; i < maxClient; ++i)
         tab[i] = (i < nbClients) ? other.tab[i] : nullptr;
-    }
 }

@@ -35,13 +35,13 @@ int main() {
     cl1.afficher();
     cl2->afficher();
 
-    Banque CreditAgricole(100);
-    CreditAgricole.ajouter(cl1);
-    CreditAgricole.ajouter(*cl2);
-    CreditAgricole.afficher();
+    Banque b(100);
+    b.ajouter(cl1);
+    b.ajouter(*cl2);
+    b.afficher();
 
-    Banque BNP(CreditAgricole);
-    BNP.afficher();
+    Banque b2(b);
+    b2.afficher();
 
     delete cl2;
     delete c2;

@@ -6,19 +6,19 @@
 
 class Banque {
 private:
-    Client** tab;    // tableau dynamique de pointeurs vers Client
-    int maxClient;   // capacité
-    int nbClients;   // nombre d'éléments stockés
+    Client** tab;// tableau dynamique de pointeurs vers Client
+    int maxClient;//capacite
+    int nbClients;// nombre d'éléments stockés
 
 public:
-    explicit Banque(int maxClient);
+    Banque(int maxClient);
     ~Banque();
 
     bool ajouter(Client& c);
     void afficher() const;
     bool appartient(const Client& c) const;
 
-    // constructeur par copie (alloue un nouveau tableau, copie les pointeurs)
+    // constructeur par copie
     Banque(const Banque& other);
 
 };

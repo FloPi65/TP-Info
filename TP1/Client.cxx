@@ -22,5 +22,4 @@ void Client::afficher() const {
     cout << "Client: " << nom << "\nDate de naissance: ";
     naissance.afficher();// utilise Date::afficher()
     compte.afficher();// affiche le solde
-    cout << "------------------------" << endl;
 }
