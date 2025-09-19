@@ -1,0 +1,17 @@
+mainTP1 : Date.o Compte.o Client.o Banque.o mainTP1.o
+	g++ Date.o Compte.o Client.o Banque.o mainTP1.o -o mainTP1
+	
+Date.o : Date.h Date.cxx
+	g++ -c Date.cxx
+
+Compte.o : Compte.h Compte.cxx
+	g++ -c Compte.cxx
+
+Client.o : Client.h Date.h Compte.h Client.cxx
+	g++ -c Client.cxx
+
+Banque.o : Banque.h Banque.cxx Client.h
+	g++ -c Banque.cxx
+	
+mainTP1.o : mainTP1.cxx Date.h Compte.h Client.h Banque.h
+	g++ -c mainTP1.cxx
